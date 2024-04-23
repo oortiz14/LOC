@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Metadatos -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Metadatos del sitio -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Neogym</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- Sección de cabecera -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              INFIT
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item ">
+                  <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="why.html"> Por qué nosotros </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="trainer.html"> Entrenadores</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#"> Gimnasios Cercanos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="trainer.html"> Encuentra </a>
+                </li>
+              </ul>
+              <div class="user_option">
+                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- Fin de la sección de cabecera -->
+
+  </div>
+
+  <!-- Sección de botón para buscar gimnasios cercanos -->
+  <section class="contact_section ">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <button onclick="buscarGimnasiosCercanos()">Buscar Gimnasios Cercanos</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Fin de la sección de botón para buscar gimnasios cercanos -->
+
+  <!-- Aquí se mostrarán los resultados de la búsqueda -->
+  <div id="resultados"></div>
+
+  <!-- Pie de página -->
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy; 2020 Todos los derechos reservados. Diseño por
+      <a href="https://html.design/">Plantillas HTML Gratuitas</a>
+    </p>
+  </footer>
+  <!-- Fin del pie de página -->
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+  <script>
+    function buscarGimnasiosCercanos() {
+      // Verificar si el navegador soporta la geolocalización
+      if (navigator.geolocation) {
+        // Obtener la posición actual del usuario
+        navigator.geolocation.getCurrentPosition(function(position) {
+          // Guardar las coordenadas de la posición actual
+          const latitud = position.coords.latitude;
+          const longitud = position.coords.longitude;
+
+          // Simular búsqueda de gimnasios cercanos (aquí deberías conectar a una base de datos o servicio de mapas)
+          const gimnasiosCercanos = [
+            { nombre: "Gimnasio A", latitud: 40.416775, longitud: -3.70379 },
+            { nombre: "Gimnasio B", latitud: 40.416901, longitud: -3.704414 },
+            { nombre: "Gimnasio C", latitud: 40.417037, longitud: -3.705079 }
+            // Agrega más gimnasios cercanos aquí si lo deseas
+          ];
+
+          // Mostrar los resultados en la página
+          const resultadosDiv = document.getElementById("resultados");
+          resultadosDiv.innerHTML = "<h2>Gimnasios Cercanos:</h2>";
+          gimnasiosCercanos.forEach(function(gimnasio) {
+            // Calcular la distancia entre la posición actual y el gimnasio
+            const distancia = calcularDistancia(latitud, longitud, gimnasio.latitud, gimnasio.longitud);
+            // Agregar el nombre del gimnasio y la distancia al div de resultados
+            resultadosDiv.innerHTML += `<p>${gimnasio.nombre} - Distancia: ${distancia} km</p>`;
+          });
+        });
+      } else {
+        // El navegador no soporta la geolocalización
+        alert("Tu navegador no soporta la geolocalización. Por favor, utiliza otro navegador.");
+      }
+    }
+
+    // Función para calcular la distancia entre dos puntos geográficos (fórmula de Haversine)
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+      const radioTierra = 6371; // Radio de la Tierra en kilómetros
