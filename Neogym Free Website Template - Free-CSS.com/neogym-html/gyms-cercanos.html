@@ -81,9 +81,6 @@
     </div>
   </section>
 
-  
-  <!-- Fin de la sección de botón para buscar gimnasios cercanos -->
-
   <!-- Aquí se mostrarán los resultados de la búsqueda -->
   <div id="resultados"></div>
 
@@ -136,3 +133,28 @@
     // Función para calcular la distancia entre dos puntos geográficos (fórmula de Haversine)
     function calcularDistancia(lat1, lon1, lat2, lon2) {
       const radioTierra = 6371; // Radio de la Tierra en kilómetros
+      // Calcular la diferencia de latitud y longitud
+      const dLat = toRadians(lat2 - lat1);
+      const dLon = toRadians(lon2 - lon1);
+      // Convertir latitudes a radianes
+      const radLat1 = toRadians(lat1);
+      const radLat2 = toRadians(lat2);
+      // Aplicar la fórmula de Haversine
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(radLat1) * Math.cos(radLat2) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      // Calcular la distancia
+      const distancia = radioTierra * c;
+      // Redondear la distancia y devolver el resultado
+      return Math.round(distancia * 100) / 100;
+    }
+
+    // Función para convertir grados a radianes
+    function toRadians(degrees) {
+      return degrees * Math.PI / 180;
+    }
+  </script>
+</body>
+
+</html>
