@@ -120,7 +120,7 @@ body {
 
 .custom_nav-container.navbar-expand-lg .navbar-nav .nav-item.active a::after, .custom_nav-container.navbar-expand-lg .navbar-nav .nav-item:hover a::after {
   display: block;
-  background-color: #ff2953;
+  background-color: #000000;
 }
 
 a,
