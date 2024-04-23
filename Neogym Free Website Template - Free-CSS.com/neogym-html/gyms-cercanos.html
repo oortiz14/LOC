@@ -75,14 +75,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-          <button onclick="buscarGimnasiosCercanos()">Buscar Gimnasios Cercanos</button>
+          <button onclick="mostrarMapa()">Mostrar Mapa</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Aquí se mostrarán los resultados de la búsqueda -->
-  <div id="resultados"></div>
+  <!-- Contenedor del mapa -->
+  <div id="mapa" style="height: 400px;"></div>
 
   <!-- Pie de página -->
   <footer class="container-fluid footer_section">
@@ -97,31 +97,27 @@
   <script src="js/bootstrap.js"></script>
 
   <script>
-    function buscarGimnasiosCercanos() {
+    // Función para mostrar el mapa
+    function mostrarMapa() {
       // Verificar si el navegador soporta la geolocalización
       if (navigator.geolocation) {
         // Obtener la posición actual del usuario
         navigator.geolocation.getCurrentPosition(function(position) {
-          // Guardar las coordenadas de la posición actual
+          // Obtener latitud y longitud
           const latitud = position.coords.latitude;
           const longitud = position.coords.longitude;
 
-          // Simular búsqueda de gimnasios cercanos (aquí deberías conectar a una base de datos o servicio de mapas)
-          const gimnasiosCercanos = [
-            { nombre: "Gimnasio A", latitud: 40.416775, longitud: -3.70379 },
-            { nombre: "Gimnasio B", latitud: 40.416901, longitud: -3.704414 },
-            { nombre: "Gimnasio C", latitud: 40.417037, longitud: -3.705079 }
-            // Agrega más gimnasios cercanos aquí si lo deseas
-          ];
+          // Inicializar mapa
+          const mapa = new google.maps.Map(document.getElementById("mapa"), {
+            center: { lat: latitud, lng: longitud }, // Centrar en la ubicación del usuario
+            zoom: 12 // Nivel de zoom
+          });
 
-          // Mostrar los resultados en la página
-          const resultadosDiv = document.getElementById("resultados");
-          resultadosDiv.innerHTML = "<h2>Gimnasios Cercanos:</h2>";
-          gimnasiosCercanos.forEach(function(gimnasio) {
-            // Calcular la distancia entre la posición actual y el gimnasio
-            const distancia = calcularDistancia(latitud, longitud, gimnasio.latitud, gimnasio.longitud);
-            // Agregar el nombre del gimnasio y la distancia al div de resultados
-            resultadosDiv.innerHTML += `<p>${gimnasio.nombre} - Distancia: ${distancia} km</p>`;
+          // Crear marcador en la ubicación del usuario
+          const marcador = new google.maps.Marker({
+            position: { lat: latitud, lng: longitud }, // Ubicación del marcador
+            map: mapa,
+            title: "Tu ubicación" // Título del marcador
           });
         });
       } else {
@@ -129,32 +125,9 @@
         alert("Tu navegador no soporta la geolocalización. Por favor, utiliza otro navegador.");
       }
     }
-
-    // Función para calcular la distancia entre dos puntos geográficos (fórmula de Haversine)
-    function calcularDistancia(lat1, lon1, lat2, lon2) {
-      const radioTierra = 6371; // Radio de la Tierra en kilómetros
-      // Calcular la diferencia de latitud y longitud
-      const dLat = toRadians(lat2 - lat1);
-      const dLon = toRadians(lon2 - lon1);
-      // Convertir latitudes a radianes
-      const radLat1 = toRadians(lat1);
-      const radLat2 = toRadians(lat2);
-      // Aplicar la fórmula de Haversine
-      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(radLat1) * Math.cos(radLat2) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      // Calcular la distancia
-      const distancia = radioTierra * c;
-      // Redondear la distancia y devolver el resultado
-      return Math.round(distancia * 100) / 100;
-    }
-
-    // Función para convertir grados a radianes
-    function toRadians(degrees) {
-      return degrees * Math.PI / 180;
-    }
   </script>
+  <!-- Script de la API de Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPAEFjedsByvUQpaTh-zZ6Tx4nWYuPdI8&callback=mostrarMapa"></script>
 </body>
 
 </html>
