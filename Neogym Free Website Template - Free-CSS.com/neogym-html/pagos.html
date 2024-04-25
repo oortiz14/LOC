@@ -40,9 +40,8 @@
                 <li class="nav-item ">
                   <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="why.html"> Por qué nosotros </a>
-                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="why.html"> ¿Por qué nosotros? </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="trainer.html"> Entrenadores</a>
@@ -51,10 +50,7 @@
                   <a class="nav-link" href="contact.html"> Contáctanos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="gyms-cercanos.html"> Encuentra tu Gimnasio </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="inscripciones.html"> Inscribete Ahora</a>
+                  <a class="nav-link" href="gyms-cercanos.html"> Encuentra tu Gimnasio</a>
                 </li>
               </ul>
               <div class="user_option">
@@ -91,6 +87,19 @@
 
         <div class="payment_details" id="paymentDetails">
           <!-- Los detalles del pago se agregarán dinámicamente aquí -->
+        </div>
+
+        <div id="emailForm" style="display: none;">
+          <div class="form-group">
+            <label for="emailInput">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="emailInput" placeholder="Correo Electrónico">
+          </div>
+          <button class="btn btn-primary" id="payButton">Pagar</button>
+        </div>
+
+        <div id="confirmationMessage" style="display: none;">
+          <h3>¡Gracias por su Pago!</h3>
+          <p>Bienvenido/a al Gimnasio INFIT. Esperamos que disfrutes de tu membresía.</p>
         </div>
       </div>
     </div>
@@ -155,6 +164,7 @@
           </div>
         `;
         $('#paymentDetails').html(paymentDetails);
+        $('#emailForm').show();
       });
 
       // Mostrar los detalles de la tarjeta cuando se selecciona pagar con tarjeta
@@ -165,6 +175,15 @@
         } else {
           $('#cardDetails').hide();
         }
+      });
+
+      // Acción al hacer clic en el botón de pago
+      $('#payButton').click(function () {
+        // Aquí se podría agregar la lógica para procesar el pago y enviar el correo electrónico de confirmación
+        // En este ejemplo, simplemente mostraremos un mensaje de confirmación y ocultaremos el formulario de pago
+        $('#paymentDetails').hide();
+        $('#emailForm').hide();
+        $('#confirmationMessage').show();
       });
     });
   </script>
