@@ -52,6 +52,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="gyms-cercanos.html"> Encuentra tu Gimnasio</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="inscripciones.html"> Inscribete Ahora</a>
+                </li>
               </ul>
               <div class="user_option">
                 <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -88,6 +91,30 @@
         <div class="payment_details" id="paymentDetails">
           <!-- Los detalles del pago se agregarán dinámicamente aquí -->
         </div>
+
+        <form id="paymentForm">
+          <div class="form-group">
+            <label for="cardNumber">Número de Tarjeta:</label>
+            <input type="text" class="form-control" id="cardNumber" placeholder="Ingrese el número de tarjeta">
+          </div>
+          <div class="form-group">
+            <label for="expiryDate">Fecha de Vencimiento:</label>
+            <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA">
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV:</label>
+            <input type="text" class="form-control" id="cvv" placeholder="Ingrese el código de seguridad">
+          </div>
+          <div class="form-group">
+            <label for="paymentMethodSelect">Método de Pago:</label>
+            <select class="form-control" id="paymentMethodSelect">
+              <option value="tarjeta">Tarjeta de Crédito</option>
+              <option value="bizum">Bizum</option>
+              <option value="presencial">Presencialmente (en efectivo)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Realizar Pago</button>
+        </form>
       </div>
     </div>
   </section>
@@ -124,16 +151,24 @@
           <h3>Detalles del Pago</h3>
           <p>Suscripción Seleccionada: ${subscription.charAt(0).toUpperCase() + subscription.slice(1)}</p>
           <p>Precio: ${price}</p>
-          <div class="form-group">
-            <label for="paymentMethodSelect">Método de Pago:</label>
-            <select class="form-control" id="paymentMethodSelect">
-              <option value="tarjeta">Tarjeta de Crédito</option>
-              <option value="bizum">Bizum</option>
-              <option value="presencial">Presencialmente (en efectivo)</option>
-            </select>
-          </div>
         `;
         $('#paymentDetails').html(paymentDetails);
+      });
+
+      // Función para manejar el envío del formulario de pago
+      $('#paymentForm').submit(function (event) {
+        event.preventDefault();
+        var cardNumber = $('#cardNumber').val();
+        var expiryDate = $('#expiryDate').val();
+        var cvv = $('#cvv').val();
+        var paymentMethod = $('#paymentMethodSelect').val();
+
+        // Aquí podrías realizar alguna validación de los datos de la tarjeta y el método de pago
+
+        // Lógica para procesar el pago (simulado)
+        alert('Pago realizado con éxito.');
+        // Redireccionar a una página de confirmación o a la página principal
+        window.location.href = 'index.html';
       });
     });
   </script>
