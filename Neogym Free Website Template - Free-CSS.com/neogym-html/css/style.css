@@ -589,5 +589,28 @@ a:focus {
   color: #292929;
 }
 
+.custom-img {
+  width: 370px;
+  height: 397px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Reglas CSS para la transición suave del carrusel */
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-duration: 1s; /* Duración de la transición en segundos */
+  transition-timing-function: ease-in-out; /* Función de temporización de la transición */
+}
+
+.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
+
+
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
