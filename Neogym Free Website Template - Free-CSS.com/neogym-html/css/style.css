@@ -616,6 +616,12 @@ a:focus {
   opacity: 1;
 }
 
+.cabecera_section {
+  position: relative;
+  background-color: #383838;
+  color: #ffffff;
+}
+
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
