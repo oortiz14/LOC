@@ -574,20 +574,25 @@ a:focus {
 
 /* footer section*/
 .footer_section {
-  background-color: #fbfdfd;
+  background-color: #29292929;
   padding: 20px;
   font-weight: 500;
 }
 
 .footer_section p {
-  color: #292929;
+  color: #ffffff;
   margin: 0;
   text-align: center;
 }
 
 .footer_section a {
-  color: #292929;
+  color: #ffffff;
 }
+
+.footer_section a {
+  color: #ffffff;
+}
+
 
 .custom-img {
   width: 370px;
@@ -611,12 +616,15 @@ a:focus {
   opacity: 1;
 }
 
+<<<<<<< HEAD
 .cabecera_section {
   position: relative;
   background-color: #383838;
   color: #ffffff;
 }
 
+=======
+>>>>>>> 0eb4afabaaf9ce79bb093600fa6a7d2e016eb1a4
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
