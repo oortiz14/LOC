@@ -611,7 +611,11 @@ a:focus {
   opacity: 1;
 }
 
-hola oscar, haz un pull
+.cabecera_section {
+  position: relative;
+  background-color: #383838;
+  color: #ffffff;
+}
 
 
 /* end footer section*/
